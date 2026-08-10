@@ -5,6 +5,7 @@ amd-ucode
 awww
 base
 base-devel
+bash-completion
 brightnessctl
 btop
 bun
@@ -41,11 +42,14 @@ irssi
 iwd
 jq
 kitty-git
+less
 libinput-tools
 libnotify
 linux
 linux-firmware
 linux-headers
+man-db
+man-pages
 miniaudio
 mtools
 nano
@@ -68,6 +72,7 @@ pipewire-alsa
 pipewire-jack
 pipewire-pulse
 pkgconf
+playerctl
 pnpm
 polkit-gnome
 polkit-kde-agent
@@ -77,11 +82,13 @@ postman-bin
 python-pillow
 qt5-graphicaleffects
 qt5-wayland
+qt5ct
 qt6ct
 quickshell-git
 reflector
 resvg
 rofi
+rsync
 sddm
 slurp
 smartmontools
@@ -89,8 +96,10 @@ spotify-launcher
 sudo
 swaync
 tectonic
+tree
 ttf-jetbrains-mono-nerd
 ttf-nerd-fonts-symbols
+unzip
 usbutils
 uwsm
 vesktop
@@ -103,6 +112,7 @@ wl-clipboard
 woff2-font-awesome
 wpa_supplicant
 xcursor-themes
+xdg-desktop-portal-gtk
 xdg-desktop-portal-hyprland
 xdg-utils
 xorg-server
@@ -111,6 +121,7 @@ yay
 yazi-git
 zed
 zen-browser-bin
+zip
 zoxide
 zram-generator
 zsh
