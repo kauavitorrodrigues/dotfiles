@@ -50,6 +50,36 @@ Hyprland instalada. Elas funcionam hoje no `.conf` antigo. Antes de depender
 delas na máquina nova, checa a wiki/changelog do Hyprland pra versão que for
 instalar lá.
 
+## Dark mode: são TRÊS camadas, não uma
+
+Sintoma clássico: o shell fica escuro mas navegador (Zen/Chrome) e apps GTK4
+continuam claros. Não basta mexer no tema GTK — as três precisam estar certas:
+
+1. **Tema GTK3/GTK4** — `gtk-3.0/settings.ini` e `gtk-4.0/settings.ini` deste
+   repo apontam pra `adw-gtk3-dark` (pacote `adw-gtk-theme`). O `hyprland.lua`
+   ainda reforça via `GTK_THEME=adw-gtk3-dark`. Isso cobre **só GTK3**.
+
+2. **Portal `Settings`** — é daqui que Chromium/Firefox/libadwaita leem
+   `org.freedesktop.appearance color-scheme`. **`xdg-desktop-portal-hyprland`
+   NÃO implementa essa interface** (ele só faz screencast/screenshot/atalhos).
+   Sem `xdg-desktop-portal-gtk` instalado junto, a interface simplesmente não
+   existe no bus e todo app cai pro claro. Pra conferir:
+
+   ```bash
+   busctl --user call org.freedesktop.portal.Desktop /org/freedesktop/portal/desktop \
+       org.freedesktop.portal.Settings Read ss "org.freedesktop.appearance" "color-scheme"
+   ```
+
+   Retorno esperado: `u 1` (1 = prefer-dark). "No such interface" = falta o backend.
+
+3. **Valor no dconf** — o portal só repassa o que está no gsettings. Fica no
+   dconf (estado do usuário, **não versionável**), então é passo manual:
+
+   ```bash
+   gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+   gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3-dark'
+   ```
+
 ## Coisas que NÃO estão neste repo (dependem de ação manual)
 
 - **Cursor "Polarnight-cursors"** — está em `/usr/share/icons/Polarnight-cursors`
