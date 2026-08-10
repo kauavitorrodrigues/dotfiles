@@ -28,7 +28,7 @@ hl.monitor({ output = "*", mode = "preferred", position = "auto", scale = "auto"
 hl.on("hyprland.start", function()
     -- exec-once = $terminal
     -- exec-once = nm-applet &
-    hl.dsp.exec_cmd("qs -p $HOME/projects/yoru/shell.qml")
+    hl.dsp.exec_cmd("qs -p $HOME/.config/quickshell/yoru")
     hl.dsp.exec_cmd("awww-daemon")
     hl.dsp.exec_cmd("swaync")
     hl.dsp.exec_cmd("gammastep -O 5000")
@@ -198,7 +198,7 @@ hl.config({
 -------------------
 -- KEYBINDINGS
 -------------------
-hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("qs -p $HOME/projects/yoru/shell.qml ipc call wallpaper toggle"))
+hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("qs -p $HOME/.config/quickshell/yoru ipc call wallpaper toggle"))
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("swaync-client -t -sw"))
 hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + C", hl.dsp.window.close())
@@ -208,35 +208,35 @@ hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(terminal .. " -e /usr/bin/yazi"))
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + Space", hl.dsp.exec_cmd("rofi -show drun"))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
-hl.bind(mainMod .. " + J", hl.dsp.layout.toggle_split())
+hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit")) -- dwindle only
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("hyprctl reload"))
 hl.bind(mainMod .. " + SHIFT + P",
     hl.dsp.exec_cmd('grim -g "$(slurp)" ~/Screenshots/$(date +"%Y-%m-%d_%H-%M-%S").png | wl-copy'))
 
 -- Foco entre janelas
-hl.bind(mainMod .. " + left", hl.dsp.window.move_focus({ direction = "l" }))
-hl.bind(mainMod .. " + right", hl.dsp.window.move_focus({ direction = "r" }))
-hl.bind(mainMod .. " + up", hl.dsp.window.move_focus({ direction = "u" }))
-hl.bind(mainMod .. " + down", hl.dsp.window.move_focus({ direction = "d" }))
+hl.bind(mainMod .. " + left", hl.dsp.focus({ direction = "left" }))
+hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
+hl.bind(mainMod .. " + up", hl.dsp.focus({ direction = "up" }))
+hl.bind(mainMod .. " + down", hl.dsp.focus({ direction = "down" }))
 
 -- Trocar workspaces (0-9)
 for i = 1, 9 do
-    hl.bind(mainMod .. " + " .. i, hl.dsp.workspace.go({ id = i }))
-    hl.bind(mainMod .. " + SHIFT + " .. i, hl.dsp.window.move_to_workspace({ id = i }))
+    hl.bind(mainMod .. " + " .. i, hl.dsp.focus({ workspace = i }))
+    hl.bind(mainMod .. " + SHIFT + " .. i, hl.dsp.window.move({ workspace = i }))
 end
-hl.bind(mainMod .. " + 0", hl.dsp.workspace.go({ id = 10 }))
-hl.bind(mainMod .. " + SHIFT + 0", hl.dsp.window.move_to_workspace({ id = 10 }))
+hl.bind(mainMod .. " + 0", hl.dsp.focus({ workspace = 10 }))
+hl.bind(mainMod .. " + SHIFT + 0", hl.dsp.window.move({ workspace = 10 }))
 
-hl.bind("ALT + Tab", hl.dsp.workspace.go({ relative = 1 }))
-hl.bind("ALT + SHIFT + Tab", hl.dsp.workspace.go({ relative = -1 }))
+hl.bind("ALT + Tab", hl.dsp.focus({ workspace = "e+1" }))
+hl.bind("ALT + SHIFT + Tab", hl.dsp.focus({ workspace = "e-1" }))
 
 -- Scratchpad
-hl.bind(mainMod .. " + S", hl.dsp.workspace.toggle_special({ name = "magic" }))
-hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move_to_workspace({ name = "special:magic" }))
+hl.bind(mainMod .. " + S", hl.dsp.workspace.toggle_special("magic"))
+hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic" }))
 
 -- Scroll entre workspaces
-hl.bind(mainMod .. " + mouse_down", hl.dsp.workspace.go({ relative = 1 }))
-hl.bind(mainMod .. " + mouse_up", hl.dsp.workspace.go({ relative = -1 }))
+hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
+hl.bind(mainMod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
 
 -- Mover/redimensionar com o mouse
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })

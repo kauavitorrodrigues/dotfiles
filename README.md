@@ -7,6 +7,11 @@ dev. Este repo mais o repo `yoru` formam a stack.
 
 - [yoru](https://github.com/kauavitorrodrigues/yoru) — shell Quickshell customizado. Tem seu próprio `install.sh` (dependências, sink virtual do Spotify, roteamento WirePlumber, cava, symlink pro Quickshell).
 
+  O `hyprland.lua` referencia o yoru **sempre** por `$HOME/.config/quickshell/yoru`,
+  que é o symlink criado pelo `install.sh` do próprio yoru. Ou seja: tanto faz onde
+  você clonar o repo (`~/yoru`, `~/projects/yoru`, etc.) — depois de rodar o
+  instalador dele, o caminho do config não muda.
+
 ## O que tem aqui
 
 Cada diretório espelha `~/.config/<nome>`. `install.sh` cria symlinks
