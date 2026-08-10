@@ -25,6 +25,8 @@ automaticamente (backup de qualquer arquivo real que já exista com sufixo `.bak
 | `zed/`        | `~/.config/zed/`                   | settings, keymap, tasks |
 | `systemd/user`| `~/.config/systemd/user/`          | só `cameractrlsd.service` (os outros .service que existem no desktop atual são gerados pelos próprios pacotes: pipewire, wireplumber) |
 | `mimeapps.list`| `~/.config/mimeapps.list`         | associações de app padrão (zen-browser etc.) |
+| `zsh/zshrc`   | `~/.zshrc`                         | config do Oh My Zsh — fora do `~/.config`, tratado à parte no `install.sh` |
+| `zsh/shell.zsh-theme` | `~/.zsh/shell.zsh-theme`   | tema custom (convertido de um config do Oh My Posh), referenciado pelo `.zshrc` via `source $HOME/.zsh/shell.zsh-theme` |
 | `pkglist.txt` / `aurlist.txt` | — (não são linkados) | export de `pacman -Qqe` / AUR pra reinstalar pacotes |
 
 ## Hyprland: só Lua, não `.conf`
@@ -55,6 +57,10 @@ instalar lá.
   no notebook se a webcam precisar do daemon de controle.
 - **Credenciais** (`gh auth login`, chaves SSH, etc.) — de propósito fora do
   repo, nunca versionar.
+- **Oh My Zsh em si** (`~/.oh-my-zsh/`) — é um framework instalado via script
+  próprio, não faz sentido versionar aqui. Só o `.zshrc` e o tema custom
+  (`zsh/`) são deste repo; rode o instalador oficial antes do `install.sh`
+  (ver setup abaixo).
 
 ## Setup em máquina nova
 
@@ -65,7 +71,9 @@ cd ~/personal/dotfiles
 sudo pacman -S --needed - < pkglist.txt
 yay -S --needed - < aurlist.txt
 
-./install.sh   # symlinka tudo pra ~/.config
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"  # oh-my-zsh
+
+./install.sh   # symlinka tudo pra ~/.config, mais .zshrc e .zsh/
 
 git clone https://github.com/kauavitorrodrigues/yoru.git ~/projects/yoru
 ~/projects/yoru/install.sh
