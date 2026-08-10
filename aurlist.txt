@@ -1,0 +1,10 @@
+google-chrome
+kitty-git
+ngrok
+postman-bin
+quickshell-git
+vesktop
+whitesur-icon-theme
+yay
+yazi-git
+zen-browser-bin

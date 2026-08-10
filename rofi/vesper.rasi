@@ -1,0 +1,106 @@
+* {
+    bg: rgba(16, 16, 16, 0.50);
+    bg-alt: #181818;
+    fg: #ffffff;
+    accent: #ffc799;
+    text-color: @fg;
+
+    font: "FiraCode Nerd Font Bold 12";
+
+    font-size: 18px;
+    outline: none;
+    border: none;
+    text-shadow:none;
+    background-color: @bg;
+}
+
+window {
+    width: 700px;
+    border-radius: 15px;
+    border: 2px;
+    border-color: @accent;
+    padding: 15px;
+}
+
+mainbox {
+    background-color: transparent;
+}
+
+#inner-box {
+    margin: 2px;
+    padding: 5px;
+    border: none;
+}
+
+#outer-box {    
+    border: none;
+}
+
+#scroll {
+    margin: 0px;
+    padding: 30px;
+    border: none;
+}
+
+entry {
+    placeholder: "Type to search";
+}
+
+entry, element-text {
+    vertical-align: 0.5;
+    background-color: transparent;
+}
+
+#entry selected {
+    border: none;
+    border-radius: 20px;
+}
+
+#input {
+    margin-left:20px;
+    margin-right:20px;
+    margin-top:20px;
+    padding: 20px;
+    border: none;
+    outline: none;
+    color: @text-color;
+    border-radius:10;
+}
+
+#input image {
+    border: none;
+    color: @text-color;
+    padding-right:10px;
+}
+
+inputbar {
+    margin-bottom: 20px;
+    border-radius: 10px;
+    padding: 10px;
+    children: [ entry ];
+}
+
+listview {
+    lines: 5;
+    columns: 2;
+    spacing: 10px;
+    background-color: transparent;
+}
+
+element {
+    padding: 8px;
+    border-radius: 8px;
+    orientation: horizontal;
+    children: [ element-icon, element-text ];
+    spacing: 15px;
+    background-color: transparent;
+}
+
+element-icon {
+    size: 1.5em;
+    background-color: transparent;
+}
+
+element selected {
+    background-color: #212121;
+}
