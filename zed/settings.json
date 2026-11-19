@@ -24,6 +24,12 @@
             "enable_lsp_tasks": true,
         },
     },
+    // Extensões instaladas automaticamente (tema e ícones usados abaixo)
+    "auto_install_extensions": {
+        "vesper-blur": true,
+        "material-icon-theme": true,
+        "html": true,
+    },
     "inline_code_actions": false,
     "cli_default_open_behavior": "existing_window",
     "ui_font_family": "Noto Sans",

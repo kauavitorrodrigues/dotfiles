@@ -21,6 +21,8 @@ hl.env("TERMINAL", "kitty")
 -- MONITORS
 -------------------
 hl.monitor({ output = "*", mode = "preferred", position = "auto", scale = "auto" })
+-- Tela do notebook (Dell Inspiron 15 3511, 15,6" 1080p): auto escolhia 1.5
+hl.monitor({ output = "eDP-1", mode = "1920x1080@60", position = "0x0", scale = 1.25 })
 
 -------------------
 -- AUTOSTART
@@ -28,27 +30,25 @@ hl.monitor({ output = "*", mode = "preferred", position = "auto", scale = "auto"
 hl.on("hyprland.start", function()
     -- exec-once = $terminal
     -- exec-once = nm-applet &
-    hl.dsp.exec_cmd("qs -p $HOME/.config/quickshell/yoru")
-    hl.dsp.exec_cmd("awww-daemon")
-    hl.dsp.exec_cmd("swaync")
-    hl.dsp.exec_cmd("gammastep -O 5000")
+    -- hl.exec_cmd executa na hora; hl.dsp.exec_cmd só cria um dispatcher (pra binds)
+    hl.exec_cmd("qs -p $HOME/.config/quickshell/yoru")
+    hl.exec_cmd("awww-daemon")
+    hl.exec_cmd("swaync")
+    hl.exec_cmd("gammastep -O 5000")
+    hl.exec_cmd("hypridle") -- bloqueio por inatividade (config em hypridle.conf)
 end)
 
 -------------------
--- PERMISSIONS -- TODO: confirmar API hl.permission() na versão do Hyprland
--- instalada na máquina nova antes de habilitar. Sem isso, grim/portal/hyprpm
--- podem pedir permissão manual na primeira execução (ecosystem.enforce_permissions
--- já está ligado abaixo). Equivalente em .conf (referência, não usar):
---   permission = /usr/(bin|local/bin)/grim, screencopy, allow
---   permission = /usr/(lib|libexec|lib64)/xdg-desktop-portal-hyprland, screencopy, allow
---   permission = /usr/(bin|local/bin)/hyprpm, plugin, allow
+-- PERMISSIONS -- API confirmada no Hyprland 0.57.2 (config de exemplo gerado):
+-- hl.permission(path, categoria, modo) com argumentos posicionais.
+-- Mudanças aqui exigem reiniciar o Hyprland (não aplicam no reload).
 -------------------
 hl.config({
     ecosystem = { enforce_permissions = 1 },
 })
--- hl.permission({ path = "/usr/(bin|local/bin)/grim", category = "screencopy", mode = "allow" })
--- hl.permission({ path = "/usr/(lib|libexec|lib64)/xdg-desktop-portal-hyprland", category = "screencopy", mode = "allow" })
--- hl.permission({ path = "/usr/(bin|local/bin)/hyprpm", category = "plugin", mode = "allow" })
+hl.permission("/usr/(bin|local/bin)/grim", "screencopy", "allow")
+hl.permission("/usr/(lib|libexec|lib64)/xdg-desktop-portal-hyprland", "screencopy", "allow")
+hl.permission("/usr/(bin|local/bin)/hyprpm", "plugin", "allow")
 
 -------------------
 -- LOOK AND FEEL
@@ -177,23 +177,18 @@ hl.config({
         kb_rules     = "",
         follow_mouse = 1,
         sensitivity  = 0,
-        touchpad     = { natural_scroll = false },
+        touchpad     = { natural_scroll = true },
     },
 })
 
--- TODO: confirmar API hl.gesture() antes de habilitar (funcional em .conf hoje):
--- gesture = 3, horizontal, workspace
--- hl.gesture({ fingers = 3, direction = "horizontal", action = "workspace" })
+-- 3 dedos na horizontal = trocar workspace (API confirmada no 0.57.2)
+hl.gesture({ fingers = 3, direction = "horizontal", action = "workspace" })
 
 -------------------
--- DEVICES
--- TODO: confirmar API hl.device() antes de habilitar (funcional em .conf hoje).
--- Só relevante se os periféricos abaixo existirem na máquina nova.
+-- DEVICES (API confirmada no 0.57.2)
+-- Regras por nome de periférico; sem efeito se o dispositivo não existir.
 -------------------
--- device { name = beken-2.4g-wireless-device, sensitivity = 0 }
--- hl.device({ name = "beken-2.4g-wireless-device", sensitivity = 0 })
--- device { name = teclado-gamer-husky-hailstrom-mouse, enabled = false }
--- hl.device({ name = "teclado-gamer-husky-hailstrom-mouse", enabled = false })
+hl.device({ name = "beken-2.4g-wireless-device", sensitivity = 0 })
 
 -------------------
 -- KEYBINDINGS
