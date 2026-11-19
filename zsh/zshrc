@@ -142,9 +142,11 @@ setopt NO_BEEP
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"export PATH="$HOME/.local/bin:$PATH"
+export PATH="$BUN_INSTALL/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 
-. "$HOME/.local/share/../bin/env"
+# criado pelo instalador do uv/rustup; nem toda máquina tem
+[ -s "$HOME/.local/bin/env" ] && . "$HOME/.local/bin/env"
 
 alias claude-mem='/home/kvrfz/.bun/bin/bun "/home/kvrfz/.claude/plugins/cache/thedotmack/claude-mem/10.5.5/scripts/worker-service.cjs"'
 
